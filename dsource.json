@@ -1,0 +1,36 @@
+{
+
+"links":[    
+    {
+        "id": 1,
+        "lnk": "https://www.youtube.com/watch?v=bmofqgR_NPg",
+        "who" : "RŻ",
+        "notes": "tutorial tablicy interaktywnej"
+    },
+    {
+        "id": 2,
+        "lnk": "https://openboard.ch/",
+        "who" : "RŻ",
+        "notes": "tablica"
+    },
+    {
+        "id": 3,
+        "lnk": "https://autyzm-biologia.blogspot.com/",
+        "who" : "RŻ",
+        "notes": "ciekawy blog o biomedycznej stronie autyzmu i ostatnich badaniach"
+    },
+    {
+        "id": 4,
+        "lnk": "https://www.niepelnosprawni.pl/ledge/x/2010508",
+        "who" : "RŻ",
+        "notes": "wywiad z Tonym Attwoodem, znanym psychologiem zajmującym się autyzmem"
+    },
+    {
+        "id": 5,
+        "lnk": "https://www.youtube.com/watch?v=OG-jmp_AX6Q",
+        "who" : "RŻ",
+        "notes": "wykład o pomiarze IQ u osób z autyzmem"
+    }
+]
+
+}

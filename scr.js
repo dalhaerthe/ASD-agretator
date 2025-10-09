@@ -1,78 +1,57 @@
+const { useState, useEffect } = React;
 
-const links = [
-    {
-        id: 1,
-        lnk: 'aaa.pl',
-        who : "ja",
-        notes: ''
-    },
-    {
-        id: 2,
-        lnk: 'bb.pl',
-        who : "ja",
-        notes: ''
-    },
-    {
-        id: 3,
-        lnk: 'cc.pl',
-        who : "ja",
-        notes: 'fgdfg'
+function App() {
+  const [links, setLinks] = useState([]);   // dane z JSON
+  const [error, setError] = useState(null); // błędy fetch
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('dsource.json'); // bez "/"
+        if (!response.ok) throw new Error('Błąd sieci: ' + response.status);
+        const data = await response.json();
+        setLinks(data.links); // zapisujemy do stanu
+      } catch (err) {
+        setError(err.message);
+      }
     }
 
-]
+    fetchData();
+  }, []); // uruchom raz przy starcie
 
+  if (error) return <p style={{color: "red"}}>❌ {error}</p>;
+  if (!links.length) return <p>⏳ Wczytywanie danych...</p>;
 
-//funkcję robiąca linki
-
-
-function MyRow(){
-    //zrobic button do linków
-    return (
-
-    <div class="toolbar">
-
-        <table class="table table-striped table-responsive-sm  table-hover">
-<thead class="table-dark">
-    <tr scope="row">
-        <th scope="col">lp</th>
-        <th >odnośnik</th>
-        <th>kto wysłał</th>
-        <th >uwagi</th>
-    </tr>
-</thead>
-<tbody class="table-striped">
-{links.map(l => (
-                <tr key={l.id}>
-                  <td>{l.id}</td>
-                  <td>
-                    
-                    <a href={l.lnk} target="_blank" rel="noopener noreferrer">
-                      {l.lnk}
-                    </a>
-                    
-                    </td>
-                  <td>{l.who}</td>
-                  <td>{l.notes}</td>
-                </tr>
-              ))}
-
-
-
-</tbody>
-</table>
-</div>
-    );
+  return (
+    <div className="container mt-4 p-1">
+      <table className="table table-striped table-hover table-responsive-sm">
+        <thead className="table-dark">
+          <tr>
+            <th>lp</th>
+            <th>odnośnik</th>
+            <th>kto wysłał</th>
+            <th>opis i uwagi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {links.map(l => (
+            <tr key={l.id}>
+              <td>{l.id}.</td>
+              <td>
+                <a href={l.lnk} target="_blank" rel="noopener noreferrer">
+                  {l.lnk}
+                </a>
+              </td>
+              <td>{l.who}</td>
+              <td>{l.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
-function App(){
-    
-    
-    return <MyRow/>
-}
-
-
-
-const root=ReactDOM.createRoot(document.getElementById("root"))
-    root.render(<App></App>);
-
-    
+// 🔹 renderowanie poza komponentem
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
